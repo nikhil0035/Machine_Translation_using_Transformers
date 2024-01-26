@@ -1,2 +1,2 @@
 # Machine_Translation_using_Transformers
-Machine Translation from scartch
+Machine Translation from Scartch
