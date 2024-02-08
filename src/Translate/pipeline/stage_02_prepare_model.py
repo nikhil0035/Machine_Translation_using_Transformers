@@ -14,7 +14,8 @@ class PrepareModelPipeline:
     def main(self,src_vocab_size,tgt_vocab_size):
         config_instance = ConfigurationManager()
         config_obj = config_instance.get_config()
-        prepare_obj=Prepare_model(config=config_obj)
+        param_obj  = config_instance.get_training_config()
+        prepare_obj=Prepare_model(config=config_obj,param=param_obj)
         model = prepare_obj.get_model(src_vocab_size,tgt_vocab_size)
         return model
         

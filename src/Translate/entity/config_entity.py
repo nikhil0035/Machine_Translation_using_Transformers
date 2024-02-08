@@ -17,3 +17,11 @@ class Config_Data:
     preload: str
     tokenizer_file: str
     experiment_name: str
+
+@dataclass(frozen=True)
+class TrainingConfig:
+    batch_size: int
+    num_epochs: int
+    lr: float
+    seq_len: int
+    d_model: int

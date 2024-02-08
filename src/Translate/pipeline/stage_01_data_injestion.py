@@ -2,6 +2,7 @@
 from Translate.config.configuration import ConfigurationManager
 from Translate.components.data_injestion import DataInjestion
 from Translate.components.dataset import BilingualDataset
+from Translate import logger
 
 STAGE_NAME = "Data Ingestion stage"
 
@@ -15,7 +16,8 @@ class DataIngestionTrainingPipeline:
     def main(self):
         config_instance = ConfigurationManager()
         config_obj = config_instance.get_config()
-        datainjestion = DataInjestion(config=config_obj,data_class=BilingualDataset)
+        param_obj = config_instance.get_training_config()
+        datainjestion = DataInjestion(config=config_obj,param=param_obj,data_class=BilingualDataset)
         train_dataloader, val_dataloader, tokenizer_src, tokenizer_tgt= datainjestion.get_ds()
         return train_dataloader, val_dataloader, tokenizer_src, tokenizer_tgt
 

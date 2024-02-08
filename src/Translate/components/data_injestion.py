@@ -1,6 +1,6 @@
 import os
 from Translate import logger
-from Translate.entity.config_entity import Config_Data
+from Translate.entity.config_entity import Config_Data,TrainingConfig
 from Translate.components.dataset import BilingualDataset
 
 from datasets import load_dataset
@@ -17,8 +17,9 @@ from tqdm import tqdm
 from pathlib import Path
 
 class DataInjestion():
-    def __init__(self,config: Config_Data,data_class):
+    def __init__(self,config: Config_Data,param:TrainingConfig,data_class):
         self.config = config
+        self.param = param
         self.BilingualDataset = data_class
     
     @staticmethod
@@ -72,7 +73,7 @@ class DataInjestion():
         logger.info(f'Max length of source sentence: {max_len_src}')
         logger.info(f'Max length of target sentence: {max_len_tgt}')
 
-        train_dataloader = DataLoader(train_ds, batch_size=self.config.batch_size, shuffle=True)
+        train_dataloader = DataLoader(train_ds, batch_size=self.param.batch_size, shuffle=True)
         val_dataloader = DataLoader(val_ds, batch_size=1, shuffle=True)
 
         return train_dataloader, val_dataloader, tokenizer_src, tokenizer_tgt

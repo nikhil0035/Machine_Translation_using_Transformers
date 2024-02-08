@@ -1,7 +1,7 @@
 from Translate.constants import *
 import os
 from Translate.utils.common import *
-from Translate.entity.config_entity import Config_Data
+from Translate.entity.config_entity import Config_Data,TrainingConfig
 
 
 class ConfigurationManager:
@@ -15,11 +15,25 @@ class ConfigurationManager:
 
         create_directories([self.config.artifacts_root])
     
+    def get_training_config(self)->TrainingConfig:
 
+        params = self.params
+
+        training_config = TrainingConfig(
+
+            batch_size = params.batch_size,
+            num_epochs = params.num_epochs,
+            lr = params.lr,
+            seq_len =  params.seq_len,
+            d_model = params.d_model,
+        )
+
+        return training_config
+
+    
     def get_config(self) -> Config_Data:
         config = self.config.config_data
 
-        # create_directories([config.root_dir])
 
         data_ingestion_config = Config_Data(
             

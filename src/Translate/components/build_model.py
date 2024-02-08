@@ -269,9 +269,9 @@ def build_transformer(src_vocab_size: int, tgt_vocab_size: int, src_seq_len: int
 
 
 class Prepare_model():
-    def __init__(self,config: Config_Data,build_transformer=build_transformer):
+    def __init__(self,config: Config_Data,param,build_transformer=build_transformer):
         self.config = config
-    
+        self.param = param
     def get_model(self, vocab_src_len, vocab_tgt_len):
-        model = build_transformer(vocab_src_len, vocab_tgt_len, self.config.seq_len, self.config.seq_len, d_model=self.config.d_model)
+        model = build_transformer(vocab_src_len, vocab_tgt_len, self.config.seq_len, self.config.seq_len, d_model=self.param.d_model)
         return model
