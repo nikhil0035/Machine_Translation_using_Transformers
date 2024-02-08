@@ -2,7 +2,7 @@ from Translate.components.build_model import Prepare_model
 from Translate import logger
 from Translate.entity.config_entity import Config_Data
 from Translate.config.configuration import ConfigurationManager
-from torchsummary import summary
+# from torchsummary import summary
 
 STAGE_NAME = "Prepare model stage"
 
