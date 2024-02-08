@@ -6,6 +6,7 @@ from torch.optim.lr_scheduler import LambdaLR
 
 import os
 from pathlib import Path
+from tqdm import tqdm
 
 from Translate.constants import *
 from Translate.utils.common import *
@@ -58,12 +59,12 @@ class train_model():
         else:
             print('No model to preload, starting from scratch')
         
-        loss_fn = nn.CrossEntropyLoss(ignore_index=tokenizer_src.token_to_id('[PAD]'), label_smoothing=0.1).to(device)
+        loss_fn = nn.CrossEntropyLoss(ignore_index=self.tokenizer_src.token_to_id('[PAD]'), label_smoothing=0.1).to(device)
 
-        for epoch in range(initial_epoch, param.num_epochs):
+        for epoch in range(initial_epoch, self.param.num_epochs):
             torch.cuda.empty_cache()
             model.train()
-            batch_iterator = tqdm(train_dataloader, desc=f"Processing Epoch {epoch:02d}")
+            batch_iterator = tqdm(self.train_dataloader, desc=f"Processing Epoch {epoch:02d}")
 
             for batch in batch_iterator:
 
@@ -81,7 +82,7 @@ class train_model():
                 label = batch['label'].to(device) # (B, seq_len)
 
                 # Compute the loss using a simple cross entropy
-                loss = loss_fn(proj_output.view(-1, tokenizer_tgt.get_vocab_size()), label.view(-1))
+                loss = loss_fn(proj_output.view(-1, self.tokenizer_tgt.get_vocab_size()), label.view(-1))
                 batch_iterator.set_postfix({"loss": f"{loss.item():6.3f}"})
 
                 # # Log the loss
@@ -97,7 +98,7 @@ class train_model():
 
                 global_step += 1
 
-            model_filename = get_weights_file_path(config, f"{epoch:02d}")
+            model_filename = get_weights_file_path(self.config, f"{epoch:02d}")
             torch.save({
             'epoch': epoch,
             'model_state_dict': model.state_dict(),
