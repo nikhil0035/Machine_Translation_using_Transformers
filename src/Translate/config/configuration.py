@@ -1,8 +1,7 @@
 from Translate.constants import *
 import os
 from Translate.utils.common import *
-from Translate.entity.config_entity import Config_Data,TrainingConfig
-
+from Translate.entity.config_entity import Config_Data,TrainingConfig,EvaluationConfig
 
 class ConfigurationManager:
     def __init__(
@@ -53,4 +52,13 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+    
+      
+    def get_evaluation_config(self) -> EvaluationConfig:
+        eval_config = EvaluationConfig(
+            mlflow_uri="https://dagshub.com/nikhil0035/Machine_Translation_using_Transformers.mlflow",
+            all_params=self.params
+           
+        )
+        return eval_config
 

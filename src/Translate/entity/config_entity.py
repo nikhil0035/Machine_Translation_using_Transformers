@@ -25,3 +25,9 @@ class TrainingConfig:
     lr: float
     seq_len: int
     d_model: int
+
+@dataclass(frozen=True)
+class EvaluationConfig:
+    mlflow_uri: str
+    all_params: dict
+    
