@@ -1,4 +1,4 @@
-# End to End Machine Translation from Scartch
+# End-to-end machine Translation from Scratch
 This project implements a neural machine translation web application from scratch using transformers and Streamlit.
 
 ### Overview
@@ -7,9 +7,9 @@ The app translates text between English and Italian using a transformer-based se
 A Streamlit interface allows users to enter text and translate between languages. The translated text is displayed along with an attention visualization to show word alignments.
 
 ### Model
-The neural machine translation model is implemented in PyTorch using the Transformer architecture. It contains an encoder and decoder with multi-head self attention layers.
+The neural machine translation model is implemented in PyTorch using the Transformer architecture. It contains an encoder and decoder with multi-head self-attention layers.
 
-The model is trained with label smoothed cross entropy loss and achieves a BLEU score of 34 on the test set.
+The model is trained with label-smoothed cross entropy loss and achieves a BLEU score of 34 on the test set.
 
 ### Web Interface
 The web interface is implemented using Streamlit. The user can enter text in the source language. The model translates to the target language and displays the output.
@@ -49,13 +49,13 @@ streamlit run app.py
 
 Now,
 ```bash
-open up you local host and port
+open up your local host and port
 ```
 
 ### Future Work
 Potential areas for improvement:
 Support more languages
-Improve model accuracy with backtranslation
+Improve model accuracy with back translation
 Add user accounts to customize translations
 Deploy web app on cloud infrastructure for scalability
 
